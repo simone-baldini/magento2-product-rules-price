@@ -1,0 +1,25 @@
+<?php
+
+/**@var \SimoneBaldini\ProductRulesPrice\Block\Adminhtml\Prices $block */
+?>
+
+<?php $data = $block->getPriceData(); ?>
+
+<table class="data-grid">
+    <thead>
+        <tr>
+            <th class="data-grid-th"><?= __('Customer group'); ?></th>
+            <th class="data-grid-th"><?= __('Price'); ?></th>
+            <th class="data-grid-th"><?= __('Catalog rule'); ?></th>
+        </tr>
+    </thaed>
+    <tbody>
+        <?php foreach ($data as $row) { ?>
+            <tr>
+                <td><?= $row['customer_group']; ?></td>
+                <td><?= $row['price']; ?></td>
+                <td><?= $row['catalog_rule']; ?></td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
