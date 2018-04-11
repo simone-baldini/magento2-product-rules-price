@@ -20,6 +20,9 @@
     "version": "1.0.0",
     "require": {},
     "autoload": {
+        "files": [
+            "registration.php"
+        ],
         "psr-4": {
             "SimoneBaldini\\ProductRulesPrice\\": ""
         }
