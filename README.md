@@ -16,7 +16,7 @@ After that, need to install this module as follows:
 </pre>
 
 <h2> Manual installation instructions</h2>
-go to magento 2 project root dir and create following directory structure :<br/>
+go to magento 2 project root dir and create following directory structure:<br/>
 <strong>/app/code/SimoneBaldini/ProductRulesPrice</strong>
 <br/>
 <h2> Enable SimoneBaldini/ProductRulesPrice module</h2>
