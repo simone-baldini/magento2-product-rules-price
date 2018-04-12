@@ -15,7 +15,7 @@ After that, need to install this module as follows:
   composer require simone-baldini/product-rules-price
 </pre>
 
-<h2> Mannual installation instructions</h2>
+<h2> Manual installation instructions</h2>
 go to magento 2 project root dir and create following directory structure :<br/>
 <strong>/app/code/SimoneBaldini/ProductRulesPrice</strong>
 <br/>
