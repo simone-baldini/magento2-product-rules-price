@@ -15,32 +15,32 @@ class Prices extends \Magento\Backend\Block\Template
     /**
      * @var PricingHelper
      */
-    protected $_princingHelper;
+    protected $princingHelper;
 
     /**
      * @var StoreManager
      */
-    protected $_storeManager;
+    protected $storeManager;
 
     /**
      * @var CatalogRule
      */
-    protected $_catalogRule;
+    protected $catalogRule;
 
     /**
      * @var CatalogRuleRepositoryInterface
      */
-    protected $_catalogRuleRepository;
+    protected $catalogRuleRepository;
 
     /**
      * @var CustomerGroupCollection
      */
-    protected $_customerGroup;
+    protected $customerGroup;
 
     /**
      * @var Registry
      */
-    protected $_coreRegistry;
+    protected $coreRegistry;
 
     /**
      * @var string
@@ -70,12 +70,12 @@ class Prices extends \Magento\Backend\Block\Template
         array $data = []
     ) {
         parent::__construct($context, $data);
-        $this->_pricingHelper = $pricingHelper;
-        $this->_storeManager = $storeManager;
-        $this->_catalogRule = $catalogRule;
-        $this->_catalogRuleRepository = $catalogRuleRepository;
-        $this->_customerGroup = $customerGroup;
-        $this->_coreRegistry = $registry;
+        $this->pricingHelper = $pricingHelper;
+        $this->storeManager = $storeManager;
+        $this->catalogRule = $catalogRule;
+        $this->catalogRuleRepository = $catalogRuleRepository;
+        $this->customerGroup = $customerGroup;
+        $this->coreRegistry = $registry;
     }
 
     /**
@@ -86,7 +86,7 @@ class Prices extends \Magento\Backend\Block\Template
     public function getProduct()
     {
         if (!$this->hasData('product')) {
-            $this->setData('product', $this->_coreRegistry->registry('product'));
+            $this->setData('product', $this->coreRegistry->registry('product'));
         }
         $product = $this->getData('product');
 
@@ -104,12 +104,12 @@ class Prices extends \Magento\Backend\Block\Template
         $today = new \DateTime();
         $productId = $this->getProduct()->getId();
         $storeId = $this->getRequest()->getParam('store', \Magento\Store\Model\Store::DEFAULT_STORE_ID);
-        $store = $this->_storeManager->getStore($storeId);
+        $store = $this->storeManager->getStore($storeId);
         $websiteId = $store->getWebsiteId();
-        $customerGroups = $this->_customerGroup->toOptionArray();
+        $customerGroups = $this->customerGroup->toOptionArray();
         foreach ($customerGroups as $customerGroup) {
             $customerGroupId = $customerGroup['value'];
-            $prices = $this->_catalogRule->getRulesFromProduct(
+            $prices = $this->catalogRule->getRulesFromProduct(
                 $today,
                 $websiteId,
                 $customerGroupId,
@@ -126,13 +126,13 @@ class Prices extends \Magento\Backend\Block\Template
                 if (!$skipNexts) {
                     $skipNexts = (bool) $price['action_stop'];
                     $href = $this->getUrl('catalog_rule/*/edit', ['id' => $price['rule_id']]);
-                    $catalogRule = $this->_catalogRuleRepository->get($price['rule_id']);
+                    $catalogRule = $this->catalogRuleRepository->get($price['rule_id']);
                     $catalogRules[] = "<a href=\"{$href}\">{$catalogRule->getName()}</a>";
                 }
             }
 
             if (count($catalogRules)) {
-                $price = $this->_catalogRule->getRulePrice(
+                $price = $this->catalogRule->getRulePrice(
                     $today,
                     $websiteId,
                     $customerGroupId,
@@ -148,5 +148,4 @@ class Prices extends \Magento\Backend\Block\Template
 
         return $data;
     }
-
 }
